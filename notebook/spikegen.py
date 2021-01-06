@@ -61,6 +61,18 @@ def spikegen(N: int, time: int, precision: int = 100, random_start: bool = False
     'times': times
   }
 
+
+def filter_spikes(data):
+  ## Removes zeros so it dose not spike on them.
+  z = list(zip(*[data[k] for k in data]))
+  f = [r for r in z if r[0] != 0]
+  v = [list(t) for t in zip(*f)]
+
+  o = dict()
+  for i, k in enumerate(data):
+    o[k] = v[i]
+  return o
+
 data = spikegen(100, 100)
 
 l = list(zip(data['labels'], data['spikes'], data['times']))
@@ -69,3 +81,5 @@ print(data['labels'])
 print(data['spikes'])
 print(data['times'])
 #print(l)
+
+
