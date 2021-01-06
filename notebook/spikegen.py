@@ -2,11 +2,12 @@
 from random import random, randrange
 
 
-def spikegen(N: int, time: int, precision: int = 100, random_start: bool = False):
+def spikegen(N: int, end_time: int, star_time: int =  0, random_start: bool = False):
+  delta_time = (end_time - star_time)
   # Initialize a direction list
-  labels = [None] * time
-  spikes = [None] * time
-  times = [None] * time
+  labels = [None] * delta_time
+  spikes = [None] * delta_time
+  times = [None] * delta_time
 
   if random_start:
     start_place = randrange(0, N)
@@ -24,7 +25,7 @@ def spikegen(N: int, time: int, precision: int = 100, random_start: bool = False
   target = id
   dir = 0
 
-  while t < time:
+  while t < delta_time:
     # Get a target
     if id == target:
       while id == target:
@@ -73,13 +74,13 @@ def filter_spikes(data):
     o[k] = v[i]
   return o
 
-data = spikegen(100, 100)
+#l = list(zip(data['labels'], data['spikes'], data['times']))
 
-l = list(zip(data['labels'], data['spikes'], data['times']))
-
-print(data['labels'])
-print(data['spikes'])
-print(data['times'])
+#print(data['labels'])
+#print(data['spikes'])
+#print(data['times'])
 #print(l)
+
+
 
 
